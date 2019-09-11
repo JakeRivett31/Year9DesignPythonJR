@@ -5,7 +5,8 @@ def main():
 
 #input
 #The numbers that will be added, multiplied, etc.
-
+	print(input("""Welcome to the 2 number calculator!
+Press enter to begin......."""))
 	num1 = int(input("What is number 1? "))
 	num2 = int(input("What is number 2? "))
 	operation = int(input("""What do you want to do? 1. Add, 2. Subtract, 3. Multiply, 4. Divide. 
@@ -28,7 +29,7 @@ Enter number: """))
 	#Division
 	elif (operation == 4):
 		print("Dividing....")
-		print(num1 // num2)
+		print(float(num1 / num2))
 	#Other
 	else:
 		print("I don't understand.")
