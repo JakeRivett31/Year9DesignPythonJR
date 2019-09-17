@@ -35,3 +35,6 @@ while radius != 0 or height != 0:
 		print(str(formula) + str(unit) + "\u00B3")
 	else: 
 		print("\nPlease do not use negative numbers.")
+
+	if radius == 0 or height == 0:
+		print("\nThank you for using the Calculator!")
