@@ -1,4 +1,4 @@
-file = open("data.txt","w")
+file = open("data.txt","a")
 #Input
 #What inputs are needed to calculate the volume of a cylinder?
 print(input("""\nWelcome to the Cylinder Volume Calculator!
@@ -18,8 +18,13 @@ while radius != 0 or height != 0:
 	
 	unit = str(input("\nWhat is the unit you are using? (Enter abbreviated version) "))
 
-	radius = int(input("\nWhat is the radius of the cylinder? "))
-	height = int(input("\nWhat is the height of the cylinder? "))
+	try:
+		radius = int(input("\nWhat is the radius of the cylinder? "))
+		height = int(input("\nWhat is the height of the cylinder? "))
+
+	except:
+		print("\n\t\tNumeric Input Required")
+		break
 
 	#Process
 	#What formula is used to calculate the volume of a cylinder?
