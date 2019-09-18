@@ -1,3 +1,4 @@
+file = open("data.txt","w")
 #Input
 #What inputs are needed to calculate the volume of a cylinder?
 print(input("""\nWelcome to the Cylinder Volume Calculator!
@@ -39,4 +40,7 @@ while radius != 0 or height != 0:
 		print(str(formula) + str(unit) + "\u00B3")
 	else: 
 		print("\nPlease do not use negative numbers.")
+
+file.write(str(formula)+"\n")
+file.close()
 
