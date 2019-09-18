@@ -30,11 +30,13 @@ while radius != 0 or height != 0:
 
 #Output
 #What is important about the output?
+	if radius == 0 or height == 0:
+		print("\nThank you for using the Calculator!")
+		break
+		
 	if radius >= 0 and height >= 0:
 		print("\nHere is your volume " + name + " I hope you enjoyed!")
 		print(str(formula) + str(unit) + "\u00B3")
 	else: 
 		print("\nPlease do not use negative numbers.")
 
-	if radius == 0 or height == 0:
-		print("\nThank you for using the Calculator!")
