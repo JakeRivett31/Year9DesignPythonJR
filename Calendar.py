@@ -15,15 +15,22 @@ if  6 < hour < 12:
 
 elif 12 < hour < 17:
 	print("Good Afternoon!")
+	os.system("say Good Afternoon!")
 
 elif 17 < hour < 22:
 	print("Good Evening!")
+	os.system("say Good Evening!")
+
 
 elif 22 < hour < 24:
-	print("Good Night!")
+	print("Bon Soir!")
+	os.system("say Bon Soir!")
+
 
 elif 0 < hour < 6:
 	print("Why are you up so early?")
+	os.system("say Why are you up so early?")
+
 
 #Gets a number that is the day of the week
 dayofweek = generaltime.tm_wday
@@ -32,6 +39,7 @@ dayofweek = generaltime.tm_wday
 
 if dayofweek == 0:
 	print("How has your Monday been so far?")
+	os.system("How has your Monday been so far?")
 
 elif dayofweek == 1:
 	print("How has your Tuesday been so far?")

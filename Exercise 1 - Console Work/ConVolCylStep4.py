@@ -13,11 +13,11 @@ radius = 1
 name = str(input("What is your name? "))
 
 
+unit = str(input("\nWhat is the unit you are using? (Enter abbreviated version) "))
+
 
 while radius != 0 or height != 0:
 	
-	unit = str(input("\nWhat is the unit you are using? (Enter abbreviated version) "))
-
 	try:
 		radius = int(input("\nWhat is the radius of the cylinder? "))
 		height = int(input("\nWhat is the height of the cylinder? "))
@@ -33,6 +33,7 @@ while radius != 0 or height != 0:
 	pi = math.pi
 	formula = float(pi * radiussquared * height)
 	formula = round(formula,2)
+	file.write(str(formula)+"\n")
 
 #Output
 #What is important about the output?
@@ -46,6 +47,6 @@ while radius != 0 or height != 0:
 	else: 
 		print("\nPlease do not use negative numbers.")
 
-file.write(str(formula)+"\n")
+
 file.close()
 
