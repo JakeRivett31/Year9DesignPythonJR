@@ -1,4 +1,13 @@
-file = open("data.txt","a")
+
+import math
+#Open function takes 2 parameters.  Both are String
+# parameter 1 is the name of the file. 
+# parameter 2 is what should be done with the file. 
+#	"w" - is the parameter for write.  Delete content and start with a new file. 
+#	"a" - is the parameter for append. Take the file and just add more onto it
+#	"r" - is read.  This is used if you need to readto file. 
+
+file = open("data.txt","w")
 #Input
 #What inputs are needed to calculate the volume of a cylinder?
 print(input("""\nWelcome to the Cylinder Volume Calculator!
@@ -29,11 +38,12 @@ while radius != 0 or height != 0:
 	#Process
 	#What formula is used to calculate the volume of a cylinder?
 	radiussquared = radius * radius
-	import math
+	
 	pi = math.pi
 	formula = float(pi * radiussquared * height)
 	formula = round(formula,2)
-	file.write(str(formula)+"\n")
+	finalanswer = str(formula) + str(unit) + "\u00B3"
+	file.write(str(finalanswer)+"\n")
 
 #Output
 #What is important about the output?
