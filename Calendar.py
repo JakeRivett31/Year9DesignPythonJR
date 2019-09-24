@@ -94,48 +94,76 @@ print("Anyways, would you like to add an event or check your tasks?")
 
 addorcheck = input("Add or Check? ")
 
-if addorcheck == ("Add"):
-	#The input for the date
-	date = input("What is the date of your event? ")
-	searchfile.write(str(date)+"\n")
-	#The input for the time of day
-	timeofday = input("What is the time of your event? ")
-	searchfile.write(str(timeofday)+"\n")
-	#The input for what the event actually is
-	event = input("What is the name of the event? ")
-	searchfile.write(str(event)+"\n")
+goagain = 0
 
-elif addorcheck == ("Check"):
-	#Input for the date that you want to check the calendar for.
-	checkdate = 0
+while goagain != ("No"):
+
+	if addorcheck == ("Add"):
+		#The input for the date
+		date = input(str("What is the date of your event? "))
+		searchfile.write(str(date))
+		#The input for the time of day
+		timeofday = input(str("What is the time of your event? "))
+		searchfile.write(str(timeofday))
+		#The input for what the event actually is
+		event = input(str("What is the name of the event? "))
+		searchfile.write(str(event))
+
+
+		goagain = input("""Would you like to add or check another event?
+Yes or No """)
+
+		if goagain == ("No"):
+			print("See you next time!")
+			break
+
+
+	elif addorcheck == ("Check"):
+		#Input for the date that you want to check the calendar for.
+		checkdate = 0
+		
+		checkdate = input("What is the date you are looking for? ")
+		
+		#Defines the variable, gives it a value to build off of.
+		count=0
+	searchfile = open("CalendarData.txt", "r")
 	
-	checkdate = input("What is the date you are looking for? ")
+	#Checks the file for text
+	date = 0
+	checkdate = date
+	numofdate = searchfile.readlines()
+	for line in numofdate:
+	    #If the the date is in the text
+	    count=0
+	    if str(checkdate) in line:
+	        
+	       #The count of how many times the date appears.
+	       count = count+1
+
+	#If there is only one event on the date, it will print event instead of events.
+	if count > 1:
+		numofevents = (" events")
+
+	else:
+		numofevents = (" event")
+
+	#Prints a staement saying how many events are on the date.
+	print("You have " + str(count) + numofevents + " on this day.")
+
+	#Option to see the events.
+	viewevents = input("Would you like to see your events on this day? Yes or No. ")
+
+	if viewevents == ("Yes"):
+		print(numofdate)
+
+	goagain = input("""Would you like to add or check another event?
+Yes or No """)
+
+	if goagain == ("No"):
+		print("See you next time!")
+		break
+
 	
-	#Defines the variable, gives it a value to build off of.
-	count=0
-searchfile = open("CalendarData.txt", "r")
-#Checks the file for text
-numofdate = searchfile.readlines()
-for line in numofdate:
-    #If the the date is in the text
-    if checkdate in line:
-        #The count of how many times the date appears.
-        count = count+1
-
-#If there is only one event on the date, it will print event instead of events.
-if count > 1:
-	numofevents = (" events")
-
-else:
-	numofevents = (" event")
-
-#Prints a staement saying how many events are on the date.
-print("You have " + str(count) + numofevents + " on this day.")
-
-#Option to see the events.
-viewevents = input("Would you like to see your events on this day? Yes or no. ")
-
-
 
 searchfile.close()
 
