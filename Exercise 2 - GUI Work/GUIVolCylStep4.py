@@ -37,18 +37,45 @@ def runMe(*args):
   volume = calcVolCylinder(r,h)
   print(volume)
 
-  output.config(state = "normal")
-  output.delete("1.0",tk.END)
-  result = "\n\n\tr\t= "+str(r)+" units\n\th\t= "+str(h)+" units\n\tvolume\t= "+str(volume)+" units\u00B3"
-  output.insert(tk.END, result)
-  output.config(state = "disabled")
+  if volume != -1:
+    output.config(state = "normal")
+    output.delete("1.0",tk.END)
+    result = "\n\n\tr\t= "+str(r)+" units\n\th\t= "+str(h)+" units\n\tvolume\t= "+str(volume)+" units\u00B3"
+    output.insert(tk.END, result)
+    output.config(state = "disabled")
+
+    file.write(str(r)+"\n")
+    file.write(str(h)+"\n")
+    file.write(str(volume)+"\n")
+  else:
+    output.config(state = "normal")
+    output.delete("1.0",tk.END)
+    output.insert(tk.END, "BAD INPUT  ")
+    output.config(state = "disabled")
+
+
 
 
 
 def checkSelect():
-  print(var.get())
-  
+  state = var.get()
+
+  if state == 1:
+    print("High Contrast")
+    radiusLabel.config(fg = "white",bg = "black")
+    heightLabel.config(fg = "white",bg = "black")
+    radiusEntry.config(fg = "white",bg = "black")
+    heightEntry.config(fg = "white",bg = "black")
+    output.config(fg = "white",bg = "black")
+  else:
+    print("Low Contrast")
+    radiusLabel.config(fg = "black",bg = "white")
+    heightLabel.config(fg = "black",bg = "white")
+    radiusEntry.config(fg = "black",bg = "white")
+    heightEntry.config(fg = "black",bg = "white")
+    output.config(fg = "black",bg = "white")
 #Main Code:
+file = open("GuiCalc.txt","a")
 root = tk.Tk()
 #Construction
 title = tk.Label(root, text = "Cylinder Volume Calculator")
@@ -92,6 +119,8 @@ check.pack(fill = tk.BOTH)
 root.bind("<Return>",runMe)
 #Building widgets goes before mainloop.
 root.mainloop()
+
+file.close()
 
 print("End Program")	
 
