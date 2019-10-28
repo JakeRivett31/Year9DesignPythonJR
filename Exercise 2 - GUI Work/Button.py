@@ -1,6 +1,8 @@
 import math
 import tkinter as tk
 
+root = tk.Tk()
+
 btnrun = tk.Button(root, text = "CALCULATE", highlightbackground='#3E4149', command = runMe)
 btnrun.config(fg="blue", command = runMe)
 btnrun.pack(fill = tk.BOTH)
