@@ -4,6 +4,7 @@ from datetime import date
 import tkinter as tk
 
 
+
 print("Start Program")
 
 class FullScreenApp(object):
@@ -11,7 +12,7 @@ class FullScreenApp(object):
         self.master=master
         pad=3
         self._geom='200x200+0+0'
-        master.geometry("{0}x{1}+0+0".format(
+        master.geometry("{0}x{0}+0+0".format(
             master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad))
         master.bind('<Escape>',self.toggle_geom)            
     def toggle_geom(self,event):
@@ -21,27 +22,27 @@ class FullScreenApp(object):
         self._geom=geom
 
 
-root = Tk()
+root = tk.Tk()
 
 root.title("Task Bar")
 
 root.configure(background='#243c6a')
 
 
+canvas = Canvas(root, bg = "#243c6a", highlightthickness=1, height=220, width=300)
+canvas.grid(row=0, column=0)
+
+photoimage = ImageTk.PhotoImage(file="SmallUCCLogo.png")
+canvas.create_image(150, 150, image=photoimage)
+
 today = date.today()
-
-photo = PhotoImage(file="SmallUCCLogo.png")
-
-w = Label(root, image=photo)
-
-w.grid(row=0, column=0, padx = 20, pady = 20)
 
 d2 = today.strftime("%B %d, %Y")
 
 
-todaysdate = tk.Label(root, text = d2)
-todaysdate.config(bg = "#243c6a", fg = "#6578a0", font =("Franklin Gothic", "30"))
-todaysdate.grid(row=0, column=1 )
+todaysdateLabel = tk.Label(root, text = d2)
+todaysdateLabel.config(bg = "#243c6a", fg = "#6578a0", font =("Franklin Gothic", "30"))
+todaysdateLabel.grid(row=0, column=1)
 
 
 app=FullScreenApp(root)
@@ -49,3 +50,4 @@ app=FullScreenApp(root)
 root.mainloop()
 
 print("End Program")
+
