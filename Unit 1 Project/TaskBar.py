@@ -3,17 +3,12 @@ from PIL import Image, ImageTk
 from datetime import date
 import tkinter as tk
 from tkinter import messagebox as tkMessageBox
-import sys
-from tkinter import simpledialog
+from tkinter import simpledialog, filedialog
+
 
 
 
 print("Start Program")
-
-
-
-
-
 
 root = tk.Tk()
 
@@ -55,21 +50,19 @@ TaskBarLabel.config(bg = "#243c6a", fg = "#6578a0", font =("Franklin Gothic", "4
 TaskBarLabel.grid(row=0, column=2)
 
 
-
-variable = IntVar(root)
-variable.set("30") # default value
-
-FontListBox = OptionMenu(root, variable, "Font Sizes", "11", "12", "etc")
-FontListBox.config(fg="#243c6a", width=5, font =("Franklin Gothic", "15"))
-FontListBox.grid(row=1, column=0)
-
-
 EventCanvas1 = Canvas(root, width=800, height=100)
 EventCanvas1.config(bd=3, relief="ridge", highlightbackground="#6578a0")
 EventCanvas1.grid(row=1, column=1, columnspan=3, pady=10)
 
+def deletetext():
+    EventLabel.destroy()
+    TimeAndDateLabel.destroy()
+    TimeNeededLabel.destroy()
+    EventCanvas1.destroy()
+    DeleteButton1.destroy()
+
 DeleteButton1 = tk.Button(root, text = "DELETE", highlightbackground="#8b0000", highlightthickness=20)
-DeleteButton1.config(fg="#8b0000")
+DeleteButton1.config(fg="#8b0000", command = deletetext)
 DeleteButton1.grid(row=1, column=4)
 
 EventLabel = tk.Label(root, text="Event")
@@ -100,9 +93,17 @@ def PopUpWindow():
    TimeInput = simpledialog.askstring("Add New Event", "Time (Include am or pm):")
    TimeNeededInput = simpledialog.askstring("Add New Event", "Time Needed (In Minutes):", parent = root)
 
-def write_File (text_File):
-    file = open("users.txt", "a")
+def saveeventstofile():
+    f = filedialog.asksaveasfile(mode="a", defaultextension=".txt")
+    if f is None:
+        return
 
+    f.write(EventNameInput)
+    f.close
+
+
+def write_File (text_File):
+    file = open("Events.txt", "a")
 
 
 AddNewEventButton = tk.Button(root, text ="Add New Event", command = PopUpWindow, fg = "#243c6a", relief = "groove")
