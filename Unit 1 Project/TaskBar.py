@@ -53,33 +53,36 @@ def popupwindow():
   data[1] = simpledialog.askstring("Add New Event", "Date (Month, Day, Year):")
   data[2] = simpledialog.askstring("Add New Event", "Time (Include am or pm):")
   data[3] = simpledialog.askstring("Add New Event", "Time Needed (In Minutes):")
+  
   file.write(str(data))
+
   eventcanvas = Canvas(root, width=800, height=100)
   eventcanvas.config(bd=3, relief="ridge", highlightbackground="#6578a0")
   eventcanvas.grid(row=2, column=1, columnspan=3, pady=10)
+
   deletebutton = tk.Button(root, text = "DELETE", highlightbackground="#8b0000", highlightthickness=20)
   deletebutton.config(fg="#8b0000", command = deletetext)
   deletebutton.grid(row=2, column=4)
+
   eventlabel = tk.Label(root, text=data[0])
   eventlabel.config(font =("Franklin Gothic", "30"), fg="#243c6a")
   eventlabel.grid(row=2, column=1)
+
   timeanddatelabel = tk.Label(root, text=data[1]+"     "+data[2])
   timeanddatelabel.config(font =("Franklin Gothic", "26"), fg="#243c6a")
   timeanddatelabel.grid(row=2, column=2)
+  
   timeneededlabel = tk.Label(root, text=data[3])
   timeneededlabel.config(font =("Franklin Gothic", "30"), fg="#243c6a")
   timeneededlabel.grid(row=2, column=3)
 
 
-
-
-
 def deletetext():
-    eventlabel.destroy()
-    timeanddatelabel.destroy()
-    timeneededlabel.destroy()
-    eventcanvas.destroy()
-    deletebutton.destroy()
+  eventlabel.destroy()
+  timeanddatelabel.destroy()
+  timeneededlabel.destroy()
+  eventcanvas.destroy()
+  deletebutton.destroy()
 
 #deletes whole event bar
 def deletetext1():
