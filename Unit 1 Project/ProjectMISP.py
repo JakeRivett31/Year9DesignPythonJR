@@ -111,6 +111,7 @@ def popupwindow(*args):
 
 
 def deletetext():
+  #Regardless of the delete button you press you always delete the last event. Funtional issue. 
   eventlabel[len(eventlabel) - 1].destroy()
   timeanddatelabel[len(timeanddatelabel) - 1].destroy()
   timeneededlabel[len(timeneededlabel) - 1].destroy()
