@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from datetime import date
 import tkinter as tk
-from tkinter import messagebox as tkMessageBox
+from tkinter import messagebox
 from tkinter import simpledialog, filedialog
 
 '''
@@ -127,7 +127,11 @@ def deletetext1():
   deletebutton1.destroy()
   
 
-
+def on_closing():
+  print("Closing")
+  if messagebox.askokcancel("Quit Program", "Do you want to quit?"):
+    
+    root.destroy()
 
 #WINDOW CONSTRUCTION
 print("Start Program")
@@ -183,6 +187,8 @@ addneweventbutton.grid(row=10, column=1, columnspan=3, sticky=W)
 
 print(linecount)
 
+
+root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop()
 
 print("End Program")
