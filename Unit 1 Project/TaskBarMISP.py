@@ -88,8 +88,9 @@ def popupwindow(*args):
   eventcanvas[len(eventcanvas) - 1].grid(row=canvasrow[0], column=1, columnspan=3, pady=10)
 
   #Can you change the rest of these so they use a list
-  deletebutton.append(tk.Button(root, text = "DELETE", highlightbackground="#8b0000", highlightthickness=20))
-  deletebutton[len(deletebutton) - 1].config(fg="#8b0000", command = deletetext)
+  deletebutton.append(tk.Button(root, highlightbackground="#8b0000", highlightthickness=20))
+  deletebutton[len(deletebutton) - 1].config(fg="#8b0000",text = "DELETE")
+  deletebutton[len(deletebutton) - 1].bind("<Button-1>",deletetext)
   deletebutton[len(deletebutton) - 1].grid(row=canvasrow[0], column=4)
 
   eventlabel.append(tk.Label(root, text=data[0]))
@@ -106,40 +107,47 @@ def popupwindow(*args):
 
  
 
-  if len(eventcanvas) >= 3:
+  if len(eventcanvas) >= 4:
     addneweventbutton.config(state = "disabled")
-    tkMessageBox.showinfo("Task Bar", "Maximum Event Capacity Reached")
+    messagebox.showinfo("Task Bar", "Maximum Event Capacity Reached")
 
   if data[3] <= 20:
-    timeneededlabel[len(timeneededlabel)-1].config(bg="green")
+    eventcanvas[len(eventcanvas)-1].config(bg="green")
+
+  if data[3] <= 50 and data[3] > 20:
+    eventcanvas[len(eventcanvas)-1].config(bg="yellow")  
   
+  if data[3] > 50:
+    eventcanvas[len(eventcanvas)-1].config(bg="red")
   
 
 
 
-def deletetext():
+def deletetext(event):
   #Regardless of the delete button you press you always delete the last event. Funtional issue. 
   #FIRST ISSUE: You have destoyed the last element but you haven't removed it
   #             from your list. 
-  eventlabel[len(eventlabel) - 1].destroy()
-  eventlabel.pop() #pops last element
 
-  timeanddatelabel[len(timeanddatelabel) - 1].destroy()
-  timeanddatelabel.pop() #pops last element
+  n = int(event.widget.cget("text")[0])
+  print(n)
+  eventlabel[n].destroy()
+  eventlabel.pop(n) #pops last element
 
-  timeneededlabel[len(timeneededlabel) - 1].destroy()
-  timeneededlabel.pop() #pops last element
+  timeanddatelabel[n].destroy()
+  timeanddatelabel.pop(n) #pops last element
+
+  timeneededlabel[n].destroy()
+  timeneededlabel.pop(n) #pops last element
 
 
-  eventcanvas[len(eventcanvas) - 1].destroy()
-  eventcanvas.pop() #pops last element
+  eventcanvas[n].destroy()
+  eventcanvas.pop(n) #pops last element
 
-  deletebutton[len(deletebutton) - 1].destroy()
-  deletebutton.pop() #pops last element
+  deletebutton[n].destroy()
+  deletebutton.pop(n) #pops last element
   
   addneweventbutton.config(state = "normal")
-  addneweventbutton.pop() #pops last element
-
+  
 #deletes whole event bar
 def deletetext1():
   eventlabel1.destroy()

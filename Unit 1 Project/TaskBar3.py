@@ -6,14 +6,7 @@ from tkinter import messagebox
 from tkinter import simpledialog, filedialog
 import csv
 
-#Problem:
-#When you press the delete button it just deletes the 
-#last element in the list.  It doesn't identify which 
-#delete button was pressed. 
-
 '''
-
-
 Mr. Miskew is cheating a bit. Really the better way to do
 this is to use Object Oriented Design.  
 
@@ -25,7 +18,7 @@ root = tk.Tk()
 
 data = ["","","",""] #Creates an empty list
 
-linecount = len(open("EventDetails.txt").readlines())
+linecount = len(open("EventDetails.csv").readlines())
 
 photocanvas = tk.Canvas(root, bg = "#243c6a", highlightthickness=0, height=100, width=300)
 
@@ -65,7 +58,7 @@ timeneededlabel = []
 
 canvasrow = [2]
 
-
+fieldnames = ['Event', 'Time', 'Date', 'Time Needed']
 
 
 #FUNCTIONS
@@ -78,7 +71,13 @@ def popupwindow(*args):
   data[2] = simpledialog.askstring("Add New Event", "Time (Include am or pm):")
   data[3] = simpledialog.askinteger("Add New Event", "Time Needed (In Minutes):")
   
-  file.write(str(data)+"\n")
+  file = open('EventDetails.csv', 'a+')
+  eventwriter = csv.DictWriter(file, fieldnames = fieldnames)
+  eventwriter.writerow({'eventlabel': eventlabel[0].get(), 'timeanddatelabel': timeanddatelabel[0].get(), 'timeneededlabel':timeneededlabel[0].get()})
+  file.close()
+  eventlabel[0].set('')
+  timeanddatelabel[0].set('')
+  timeneededlabel[0].set('')
 
   canvasrow[0] = canvasrow[0] + 1
 
@@ -104,14 +103,15 @@ def popupwindow(*args):
   timeneededlabel[len(timeneededlabel) - 1].config(font =("Franklin Gothic", "30"), fg="#243c6a")
   timeneededlabel[len(timeneededlabel) - 1].grid(row=canvasrow[0], column=3)
 
- 
+  if len(eventcanvas) < 4:
+    addneweventbutton.config(state = "normal")
 
-  if len(eventcanvas) >= 3:
+  if len(eventcanvas) >= 4:
     addneweventbutton.config(state = "disabled")
     tkMessageBox.showinfo("Task Bar", "Maximum Event Capacity Reached")
 
-  if data[3] <= 20:
-    timeneededlabel[len(timeneededlabel)-1].config(bg="green")
+  if timeneededlabel <= 20:
+    timeneededlabel.config(bg="green")
   
   
 
@@ -119,27 +119,12 @@ def popupwindow(*args):
 
 def deletetext():
   #Regardless of the delete button you press you always delete the last event. Funtional issue. 
-  #FIRST ISSUE: You have destoyed the last element but you haven't removed it
-  #             from your list. 
   eventlabel[len(eventlabel) - 1].destroy()
-  eventlabel.pop() #pops last element
-
   timeanddatelabel[len(timeanddatelabel) - 1].destroy()
-  timeanddatelabel.pop() #pops last element
-
   timeneededlabel[len(timeneededlabel) - 1].destroy()
-  timeneededlabel.pop() #pops last element
-
-
   eventcanvas[len(eventcanvas) - 1].destroy()
-  eventcanvas.pop() #pops last element
-
   deletebutton[len(deletebutton) - 1].destroy()
-  deletebutton.pop() #pops last element
   
-  addneweventbutton.config(state = "normal")
-  addneweventbutton.pop() #pops last element
-
 #deletes whole event bar
 def deletetext1():
   eventlabel1.destroy()
