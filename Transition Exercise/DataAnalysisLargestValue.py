@@ -8,8 +8,6 @@ for i in range(0, len(datalist),1):
     datalist[i] = datalist[i].replace(",","")
     datalist[i] = float(datalist[i])
 
-print(sorted(datalist))
+sortedlist = sorted(datalist)
 
-
-
-
+print(sortedlist[-1])

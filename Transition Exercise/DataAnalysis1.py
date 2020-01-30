@@ -1,4 +1,4 @@
-data = open("randomDataExtract2.txt","r")
+data = open("randomDataRAW.txt","r")
 
 datastring = data.read()
 
